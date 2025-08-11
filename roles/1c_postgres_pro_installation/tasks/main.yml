@@ -1,0 +1,7 @@
+---
+- name: Add PostgresPro PostgreSQL repository
+  ansible.builtin.include_tasks: includes/add_pgpro_repo.yml
+- name: PostgreSQL installation
+  ansible.builtin.include_tasks: includes/install_pgpro.yml
+- name: PostgreSQL Users
+  ansible.builtin.include_tasks: includes/postgresql_users_management.yml

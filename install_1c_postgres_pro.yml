@@ -1,0 +1,14 @@
+---
+- name: Create deploy user and add ssh-key
+  hosts: all
+  become: true
+  vars:
+    POSTGRES_PASSWORD: "password"
+    POSTGRES_VERSION: "17"
+    APP1C_USER: "app1c"
+    APP1C_PASSWORD: "app1c_password"
+  
+  tasks:
+    - name: Include 1C PostgresPro installation role 
+      include_role:
+        name: 1c_postgres_pro_installation

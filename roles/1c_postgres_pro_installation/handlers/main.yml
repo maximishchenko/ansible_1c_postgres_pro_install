@@ -1,0 +1,23 @@
+---
+- name: Restart PostgreSQL
+  service:
+    name: postgrespro-1c-{{ POSTGRES_VERSION }}
+    state: restarted
+
+- name: Remove repository script
+  file:
+    path: /tmp/pgpro-repo-add.sh
+    state: absent
+
+- name: Update repositories packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Remove useless packages
+  apt:
+    autoclean: yes
+- name: Remove useless dependencies
+  apt:
+    autoremove: yes

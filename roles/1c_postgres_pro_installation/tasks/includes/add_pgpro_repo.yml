@@ -1,0 +1,18 @@
+---
+- name: Download PostgreSQL Pro repository script using uri module
+  uri:
+    url: "https://repo.postgrespro.ru/1c-{{ POSTGRES_VERSION }}/keys/pgpro-repo-add.sh"
+    dest: /tmp/pgpro-repo-add.sh
+    mode: '0755'
+    creates: /tmp/pgpro-repo-add.sh
+
+- name: Execute repository script
+  command: /tmp/pgpro-repo-add.sh
+  args:
+    creates: /etc/apt/sources.list.d/pgpro.list
+  notify:
+    - Remove repository script
+    - Update repositories packages
+
+- name: Flushing handlers
+  meta: flush_handlers

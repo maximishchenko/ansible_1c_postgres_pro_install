@@ -1,0 +1,13 @@
+---
+- name: Install PostgreSQL
+  apt:
+    name: postgrespro-1c-{{ POSTGRES_VERSION }}
+    state: present
+    update_cache: yes
+  notify: 
+    - Restart PostgreSQL
+    - Remove useless packages
+    - Remove useless dependencies
+
+- name: Flushing handlers
+  meta: flush_handlers
