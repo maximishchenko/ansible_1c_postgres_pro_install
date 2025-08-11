@@ -1,7 +1,9 @@
 ---
 - name: Install PostgreSQL for 1C from Postgres Professional
   hosts: all
-  tasks:
-    - name: Include 1C PostgresPro installation role 
-      include_role:
-        name: 1c_postgres_pro_installation
+  roles:
+      - { role: 1c_postgres_pro_installation }
+  #tasks:
+  #  - name: Include 1C PostgresPro installation role 
+  #    include_role:
+  #      name: 1c_postgres_pro_installation
