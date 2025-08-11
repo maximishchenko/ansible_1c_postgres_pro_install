@@ -1,25 +1,28 @@
 ---
 - name: Change postgres user password
   ansible.builtin.shell: |
-    cd /tmp && sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '{{ POSTGRES_PASSWORD }}'"
+    cd /tmp && sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '{{ postgres_password }}'"
   changed_when: false
+
+- name: Check if 1C application user already exists
+  ansible.builtin.shell: |
+    sudo -u postgres psql -c "SELECT rolname FROM pg_roles WHERE rolname = '{{ app_1c_user }}';"
+  register: app1c_user_exists
 
 - name: Create app1c user for 1C databases
   ansible.builtin.shell: |
-    sudo -u postgres psql -c "CREATE USER {{ APP1C_USER }} WITH LOGIN SUPERUSER CREATEDB CREATEROLE INHERIT REPLICATION BYPASSRLS PASSWORD '{{ APP1C_PASSWORD }}';"
+    sudo -u postgres psql -c "CREATE USER {{ app_1c_user }} WITH LOGIN SUPERUSER CREATEDB CREATEROLE INHERIT REPLICATION BYPASSRLS PASSWORD '{{ app_1c_password }}';"
   register: create_user
   changed_when: create_user.rc == 0
   failed_when: create_user.rc != 0 and 'already exists' not in create_user.stderr
+  when: app1c_user_exists.rc != 0
 
 - name: Grant privileges to app1c user
   ansible.builtin.shell: |
-    sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL DATABASES TO {{ APP1C_USER }};"
-    sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO {{ APP1C_USER }};"
-    sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO {{ APP1C_USER }};"
-    sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON FUNCTIONS TO {{ APP1C_USER }};"
-    sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TYPES TO {{ APP1C_USER }};"
+    sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL DATABASES TO {{ app_1c_user }};"
+    sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO {{ app_1c_user }};"
+    sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON SEQUENCES TO {{ app_1c_user }};"
+    sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON FUNCTIONS TO {{ app_1c_user }};"
+    sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TYPES TO {{ app_1c_user }};"
   when: create_user.changed
   notify: Restart PostgreSQL
-
-
-

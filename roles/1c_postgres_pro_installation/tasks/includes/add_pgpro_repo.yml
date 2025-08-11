@@ -1,15 +1,24 @@
 ---
-- name: Download PostgreSQL Pro repository script using uri module
+- name: Check if repository file exists
+  stat:
+    path: "{{ apt_repository_file }}"
+  register: apt_repository_file_exists
+
+- name: Remove apt repository file if exists
+  file:
+    path: "{{ apt_repository_file }}"
+    state: absent
+  when: apt_repository_file_exists.stat.exists
+
+- name: Download PostgreSQL Pro repository script
   uri:
-    url: "https://repo.postgrespro.ru/1c-{{ POSTGRES_VERSION }}/keys/pgpro-repo-add.sh"
-    dest: /tmp/pgpro-repo-add.sh
+    url: "{{ postgresql_1c_repo_url }}"
+    dest: "{{ repository_file }}"
     mode: '0755'
     creates: /tmp/pgpro-repo-add.sh
 
 - name: Execute repository script
-  command: /tmp/pgpro-repo-add.sh
-  args:
-    creates: /etc/apt/sources.list.d/pgpro.list
+  command: "{{ repository_file }}"
   notify:
     - Remove repository script
     - Update repositories packages

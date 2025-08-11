@@ -1,5 +1,0 @@
----
-- hosts: localhost
-  remote_user: root
-  roles:
-    - roles/1c_postgres_pro_installation

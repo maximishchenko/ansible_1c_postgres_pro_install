@@ -1,6 +1,7 @@
 ---
-# defaults file for roles/1c_postgres_pro_installation
-ansible_become: yes
-ansible_user: "{{ vault_ansible_user }}"
-ansible_ssh_private_key: "{{ vault_ansible_ssh_private_key }}"
-ansible_become_password: "{{ vault_ansible_become_password }}"
+postgresql_1c_version: 17
+apt_repository_file: "/etc/apt/sources.list.d/postgresql-1c-{{ postgresql_1c_version }}.list"
+postgresql_1c_repo_url: "https://repo.postgrespro.ru/1c-{{ postgresql_1c_version }}/keys/pgpro-repo-add.sh"
+postgresql_1c_service: "postgrespro-1c-{{ postgresql_1c_version }}"
+repository_file: "/tmp/pgpro-repo-add.sh"
+app_1c_user: "app1c"

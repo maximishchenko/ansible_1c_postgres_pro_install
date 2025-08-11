@@ -1,12 +1,12 @@
 ---
 - name: Restart PostgreSQL
   service:
-    name: postgrespro-1c-{{ POSTGRES_VERSION }}
+    name: "{{ postgresql_1c_service }}"
     state: restarted
 
 - name: Remove repository script
   file:
-    path: /tmp/pgpro-repo-add.sh
+    path: "{{ repository_file }}"
     state: absent
 
 - name: Update repositories packages

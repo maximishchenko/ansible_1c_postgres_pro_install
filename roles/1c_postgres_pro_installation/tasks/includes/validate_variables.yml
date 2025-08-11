@@ -1,0 +1,15 @@
+- name: Validate postgres user password
+  ansible.builtin.assert:
+    that:
+      - postgres_password is defined
+      - postgres_password | length > 0
+    fail_msg: "Critical error: variable 'postgres_password' must be defined and non-empty!"
+    success_msg: "Variable check passed postgres_password"    
+
+- name: Validate app_1c_password user password
+  ansible.builtin.assert:
+    that:
+      - app_1c_password is defined
+      - app_1c_password | length > 0
+    fail_msg: "Critical error: variable 'app_1c_password' must be defined and non-empty!"
+    success_msg: "Variable check passed app_1c_password"    

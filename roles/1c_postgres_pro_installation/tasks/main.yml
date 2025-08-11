@@ -1,4 +1,6 @@
 ---
+- name: Validate required playbook variables
+  ansible.builtin.include_tasks: includes/validate_variables.yml
 - name: Add PostgresPro PostgreSQL repository
   ansible.builtin.include_tasks: includes/add_pgpro_repo.yml
 - name: PostgreSQL installation

@@ -1,7 +1,7 @@
 ---
 - name: Install PostgreSQL
   apt:
-    name: postgrespro-1c-{{ POSTGRES_VERSION }}
+    name: postgrespro-1c-{{ postgresql_1c_version }}
     state: present
     update_cache: yes
   notify: 
