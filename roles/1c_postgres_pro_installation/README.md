@@ -1,7 +1,7 @@
-Role Name
+1c_postgres_pro_installation
 =========
 
-This role provide installation PostgreSQL for 1C from PostgresPro
+This role provide installation PostgreSQL for 1C from Postgres Professional
 
 Requirements
 ------------
@@ -11,10 +11,15 @@ This role does not have any requirements
 Role Variables
 --------------
 
-* postgres_password: postgres user password for setup (*required)
-* app_1c_password: 1C application user password for setup (*required)
-* app_1c_user: 1C application user name (optional, default: app1c)
-* postgresql_1c_version: version of PostgreSQL for installation (optional, default: 17)
+> required variables
+
+* `postgres_password`: postgres user password for setup
+* `app_1c_password`: 1C application user password for setup
+
+> optional variables
+
+* `app_1c_user`: 1C application user name. Default: `app1c`
+* `postgresql_1c_version`: version of PostgreSQL for installation. Default: `17`
 
 Dependencies
 ------------
@@ -24,7 +29,7 @@ This role does not have any dependencies
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Including an example of how to use your role (for instance, without variables passed in as parameters):
 
 ```
 ---
@@ -38,7 +43,7 @@ Including an example of how to use your role (for instance, with variables passe
 ```
   - hosts: servers
     roles:
-        - { role: username.rolename, postgres_password: "...", app_1c_password: "..." }
+        - { role: username.rolename, postgresql_1c_version: 17, postgres_password: "postgresuserpassword", app_1c_user: "onecuser", app_1c_password: "onecpassword" }
 ```
 
 License
@@ -49,4 +54,4 @@ GPLv3
 Author Information
 ------------------
 
-Maxim Ishchenko <m.g.ishchenko@gmail.com>
+Maxim Ishchenko <m.g.ishchenko@yandex.ru>

@@ -16,7 +16,7 @@ Playbook
 
 1. Add servers IP or FQDN to inventory file such as ```inventory/inventory.cfg```
 
-> Example [inventory/inventory.cfg.sample](inventory/inventory.cfg.sample))
+> Example [inventory/inventory.ini.sample](inventory/inventory.ini.sample))
 
 2. Add variables to host_vars or group_vars
 
