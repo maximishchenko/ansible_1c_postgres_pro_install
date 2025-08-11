@@ -2,14 +2,14 @@
 
 Playbook
 
-- Validate required variables, such as postgres_password and app_1c_password
+- Validate required variables, such as `postgres_password` and `app_1c_password`
 - Check if pgpro specific version repository exists
 - Remove old repository file if exists
-- Add repository for specific PostgreSQL version (postgresql_1c_version variable)
+- Add repository for specific PostgreSQL version (`postgresql_1c_version` variable)
 - Install PostgreSQL
 - Set password for postgres user
-- Create user for 1C application
-- Set password for user of 1C application
+- Create user for 1C application (`app_1c_user` variable)
+- Set password for user of 1C application (`app_1c_password` varable)
 - Grant permission for user of 1C application
 
 ## Preparation

@@ -3,28 +3,18 @@
 
 This role provide installation PostgreSQL for 1C from Postgres Professional
 
-Requirements
-------------
-
-This role does not have any requirements
-
 Role Variables
 --------------
 
-> required variables
+> Required variables
 
-* `postgres_password`: postgres user password for setup
-* `app_1c_password`: 1C application user password for setup
+* `postgres_password`: postgres user's password for setup
+* `app_1c_password`: 1C application user's password for setup
 
-> optional variables
+> Optional variables
 
 * `app_1c_user`: 1C application user name. Default: `app1c`
 * `postgresql_1c_version`: version of PostgreSQL for installation. Default: `17`
-
-Dependencies
-------------
-
-This role does not have any dependencies
 
 Example Playbook
 ----------------
