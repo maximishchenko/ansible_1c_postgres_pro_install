@@ -25,4 +25,8 @@
     sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON FUNCTIONS TO {{ app_1c_user }};"
     sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TYPES TO {{ app_1c_user }};"
   when: create_user.changed
-  notify: Restart PostgreSQL
+  notify: 
+    - Restart PostgreSQL
+
+- name: Flushing handlers
+  meta: flush_handlers

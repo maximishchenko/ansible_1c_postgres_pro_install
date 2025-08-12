@@ -1,9 +1,11 @@
 ---
-- name: Validate required playbook variables
-  ansible.builtin.include_tasks: includes/validate_variables.yml
+- name: Set passwords
+  ansible.builtin.include_tasks: includes/set_passwords.yml
 - name: Add PostgresPro PostgreSQL repository
   ansible.builtin.include_tasks: includes/add_pgpro_repo.yml
 - name: PostgreSQL installation
   ansible.builtin.include_tasks: includes/install_pgpro.yml
 - name: PostgreSQL Users
   ansible.builtin.include_tasks: includes/postgresql_users_management.yml
+- name: Show passwords
+  ansible.builtin.include_tasks: includes/show_passwords.yml

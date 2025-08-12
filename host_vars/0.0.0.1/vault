@@ -1,5 +1,3 @@
 vault_ansible_user: ansible
 vault_ssh_private_key: "~/.ssh/id_rsa"
 vault_ansible_become_password: thisisverysecurestrongansibleuserpassword
-vault_postgres_password: thisisverysecurestrongpostgrespassword
-vault_app_1c_password: thisisverysecurestrongapp1cuserpassword
